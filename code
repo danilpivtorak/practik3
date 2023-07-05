@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int countNumbers(int digits) {
+    if (digits <= 0)
+        return 0;
+
+    int count = 1;  // Початкова кількість чисел (одна цифра)
+
+    int prevCount = 1;
+    int prevPrevCount = 0;
+
+    for (int i = 2; i <= digits; i++) {
+        int temp = count;
+        count += count + prevCount + prevPrevCount;
+        prevPrevCount = prevCount;
+        prevCount = temp;
+    }
+
+    return count;
+}
+
+int main() {
+    int digits;
+    cout << "Введіть кількість розрядів: ";
+    cin >> digits;
+
+    int result = countNumbers(digits);
+    cout << "Кількість чисел з " << digits << " розрядами: " << result << endl;
+
+    return 0;
+}
